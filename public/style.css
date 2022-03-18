@@ -1,36 +1,79 @@
-body {
-  display: flex;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.wrapper {
   height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+}
+.info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 40%;
+  background-image: linear-gradient(
+    96.5deg,
+    rgba(39, 103, 187, 1) 10.4%,
+    rgba(16, 72, 144, 1) 87.7%
+  );
+}
+.game {
+  display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
-  flex-direction: column;
+  width: 60%;
 }
-.grid {
-  border: 1px solid;
-  height: 120px;
-  width: 140px;
-  display: flex;
-  flex-wrap: wrap;
+h2 {
+  background: black;
+  padding: 0.1rem 0.4rem;
+  color: white;
+  font-size: 2rem;
+  font-weight: bolder;
+  border-radius: 1rem;
+  border: double 4px white;
+}
+span {
+  color: red;
+  font-size: 3rem;
+  padding: 0.5rem;
+  text-shadow: 0 0 2px white;
+}
+#game-base {
+  width: 640px;
+  margin: 0 auto;
+  padding-top: 60px;
 }
 
-.grid div {
-  height: 20px;
-  width: 20px;
-  cursor: pointer;
-}
-.taken {
-  pointer-events: none;
-}
-
-.player-one {
-  background-color: red;
+#game-table {
+  width: 434px;
+  height: 374px;
+  margin: 0 auto;
+  background: url("http://img.sr/images/2014/01/28/base.png") 0 0 no-repeat;
+  position: relative;
+  border: 2px solid #050aea;
   border-radius: 10px;
 }
 
-.player-two {
-  background-color: blue;
-  border-radius: 10px;
+.disc {
+  position: absolute;
+  z-index: -1;
+  top: -55px;
+  left: 14px;
+  width: 46px;
+  height: 46px;
+  border-radius: 46px;
+  transition: all 0.3s ease;
 }
-#playAgain {
-  display: none;
+
+.disc.red {
+  background: red;
+}
+
+.disc.yellow {
+  background: gold;
 }

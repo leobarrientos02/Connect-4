@@ -2,11 +2,31 @@ document.addEventListener("DOMContentLoaded", () => {
   const squares = document.querySelectorAll(".grid div");
   const grid = document.querySelector(".grid");
   const result = document.querySelector("#result");
+  const takenSquares = document.querySelectorAll(".taken");
   const displayCurrentPlayer = document.querySelector("#current-player");
   const playAgainBtn = document.querySelector("#playAgain");
-  let currentPlayer = 1;
+  const singlePlayerButton = document.querySelector("#singlePlayerButton");
+  const multiPlayerButton = document.querySelector("#multiPlayerButton");
+
+  let gameMode = "";
+  let currentPlayer = 0;
+  let ready = false;
+  let enemyReady = false;
+
+  // select player gameMode
+  singlePlayerButton.addEventListener("click", startSinglePlayer);
+  multiPlayerButton.addEventListener("click", startMultiPlayer);
 
   const socket = io();
+
+  // Get your player number
+  socket.on("player-number", (num) => {
+    if (num === -1) {
+      result.innerHTML = "Sorry, the server is full";
+    } else {
+      currentPlayer = parseInt(num);
+    }
+  });
 
   const winningArrays = [
     [0, 1, 2, 3],
@@ -112,26 +132,90 @@ document.addEventListener("DOMContentLoaded", () => {
     }
   }
 
-  for (let i = 0; i < squares.length; i++) {
-    squares[i].onclick = () => {
-      //if the square below your current square is taken, you can go ontop of it
-      if (
-        squares[i + 7].classList.contains("taken") &&
-        !squares[i].classList.contains("taken")
-      ) {
-        if (currentPlayer == 1) {
-          squares[i].classList.add("taken");
-          squares[i].classList.add("player-one");
-          currentPlayer = 2;
-          displayCurrentPlayer.innerHTML = currentPlayer;
-        } else if (currentPlayer == 2) {
-          squares[i].classList.add("taken");
-          squares[i].classList.add("player-two");
-          currentPlayer = 1;
-          displayCurrentPlayer.innerHTML = currentPlayer;
-        }
-      } else alert("cant go here");
-      checkBoard();
-    };
+  // MultiPlayer
+  function startMultiPlayer() {
+    gameMode = "Multiplayer";
+    if (currentPlayer === 0) {
+      displayCurrentPlayer.innerHTML = "Player 1";
+    } else if (currentPlayer === 1) {
+      displayCurrentPlayer.innerHTML = "Player 2";
+    }
+    for (let i = 0; i < squares.length; i++) {
+      squares[i].onclick = () => {
+        //if the square below your current square is taken, you can go ontop of it
+        if (
+          squares[i + 7].classList.contains("taken") &&
+          !squares[i].classList.contains("taken")
+        ) {
+          if (currentPlayer == 0) {
+            squares[i].classList.add("taken");
+            squares[i].classList.add("player-one");
+            currentPlayer = 1;
+            if (currentPlayer === 1) {
+              displayCurrentPlayer.innerHTML = "Player 2";
+            }
+          } else if (currentPlayer == 1) {
+            squares[i].classList.add("taken");
+            squares[i].classList.add("player-two");
+            currentPlayer = 0;
+            if (currentPlayer === 0) {
+              displayCurrentPlayer.innerHTML = "Player 1";
+            }
+          }
+        } else alert("cant go here");
+        checkBoard();
+      };
+    }
   }
+
+  let board = [];
+  function startSinglePlayer() {
+    takenSquares.forEach((taken) => {
+      taken.remove();
+    });
+    squares.forEach((square) => {
+      board.push(square);
+      square.style.backgroundColor = "blue";
+    });
+
+    console.log(board);
+  }
+  // function startSinglePlayer() {
+  //   if (currentPlayer === 0) {
+  //     displayCurrentPlayer.innerHTML = "You";
+  //   }
+  //   let boardArray = [];
+  //   for (let i = 0; i < squares.length; i++) {
+  //     squares[i].onclick = () => {
+  //       //if the square below your current square is taken, you can go ontop of it
+  //       if (
+  //         squares[i + 7].classList.contains("taken") &&
+  //         !squares[i].classList.contains("taken")
+  //       ) {
+  //         squares[i].classList.add("taken");
+  //         squares[i].classList.add("player-one");
+  //         let playerChoice = i;
+  //         currentPlayer = 1;
+
+  //         if (currentPlayer === 1) {
+  //           displayCurrentPlayer.innerHTML = "BOT";
+  //         }
+  //         if (playerChoice === 35) {
+  //           squares[playerChoice + 6].classList.add("taken");
+  //           squares[playerChoice + 6].classList.add("player-two");
+  //           currentPlayer = 0;
+  //         } else if (playerChoice === 41) {
+  //           squares[playerChoice - 6].classList.add("taken");
+  //           squares[playerChoice - 6].classList.add("player-two");
+  //           currentPlayer = 0;
+  //         } else {
+  //           squares[playerChoice - 7].classList.add("taken");
+  //           squares[playerChoice - 7].classList.add("player-two");
+  //           currentPlayer = 0;
+  //         }
+  //       }
+  //       checkBoard();
+  //     };
+  //   }
+  // }
 });

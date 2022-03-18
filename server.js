@@ -14,6 +14,22 @@ app.use(express.static(path.join(__dirname, "public")));
 server.listen(PORT, () => console.log(`server running on port ${PORT}`));
 
 // Handle socket connection requests from web clieny
+
+const connections = [null, null];
 io.on("connection", (socket) => {
   console.log("New WS Connection");
+
+  // Find an available player numiber
+  let playerIndex = -1;
+  for (const i in connections) {
+    if (connections[i] === null) {
+      playerIndex = i;
+      break;
+    }
+  }
+  socket.emit("player-number", playerIndex);
+
+  console.log(`Player ${playerIndex} connected`);
+
+  if (playerIndex === -1) return;
 });
