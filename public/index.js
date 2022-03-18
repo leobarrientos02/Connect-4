@@ -1,5 +1,6 @@
 var gameField = new Array();
 var board = document.getElementById("game-table");
+const displayCurrentPlayer = document.getElementById("current-player");
 var currentCol;
 var currentRow;
 var currentPlayer;
@@ -176,7 +177,7 @@ function checkForMoveVictory() {
   if (!checkForVictory(currentRow, currentCol)) {
     placeDisc(3 - currentPlayer);
   } else {
-    var ww = currentPlayer == 2 ? "Computer" : "Player";
+    var ww = currentPlayer == 2 ? "Computer" : "You";
     placeDisc(3 - currentPlayer);
     alert(ww + " win!");
     board.innerHTML = "";

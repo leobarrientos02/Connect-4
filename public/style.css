@@ -3,6 +3,9 @@
   padding: 0;
   box-sizing: border-box;
 }
+body {
+  font-family: "Montserrat", sans-serif;
+}
 .wrapper {
   height: 100vh;
   width: 100%;
@@ -15,12 +18,33 @@
   align-items: center;
   justify-content: center;
   width: 40%;
+  padding: 3rem;
   background-image: linear-gradient(
     96.5deg,
     rgba(39, 103, 187, 1) 10.4%,
     rgba(16, 72, 144, 1) 87.7%
   );
 }
+.how-to-play h3 {
+  font-size: 2rem;
+  color: white;
+  text-decoration: underline;
+  margin: 1rem 0rem;
+}
+.how-to-play p {
+  font-size: 1.2rem;
+  color: white;
+}
+.menu {
+  height: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  text-align: center;
+  color: white;
+}
+
 .game {
   display: flex;
   flex-direction: column;
@@ -55,7 +79,7 @@ span {
   margin: 0 auto;
   background: url("http://img.sr/images/2014/01/28/base.png") 0 0 no-repeat;
   position: relative;
-  border: 2px solid #050aea;
+  border: 4px solid #2767bb;
   border-radius: 10px;
 }
 

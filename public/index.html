@@ -4,13 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Connect-4</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500&display=swap" rel="stylesheet"> 
     <link rel="stylesheet" href="./style.css">
 </head>
 <body>
     <div class="wrapper">
         <div class="info">
             <h2>CONNECT<span>4</span></h2>
+            <div class="how-to-play">
+                <h3>How to play?</h3>
+                <p>The objective of the game is to be the first player to connect four of the same colored discs in a row (either vertically, horizontally, or diagonally). On your turn, you can only drop one of your colored discs. Remember to try your best to also prevent the opponent from connecting four. GOOD LUCK!</p>
+            </div>
+
+            <div class="menu">
+                <div id="current-player"></div>
+            </div>
         </div>
         <div class="game">
             <div id="game-base">
