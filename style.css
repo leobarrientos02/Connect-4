@@ -12,12 +12,15 @@ body {
   display: flex;
   flex-direction: row;
 }
+
+/* INFO SECTION */
 .info {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   width: 40%;
+  text-align: center;
   padding: 3rem;
   background-image: linear-gradient(
     96.5deg,
@@ -35,23 +38,6 @@ body {
   font-size: 1.2rem;
   color: white;
 }
-.menu {
-  height: 50%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 2.5rem;
-  text-align: center;
-  color: white;
-}
-
-.game {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  width: 60%;
-}
 h2 {
   background: black;
   padding: 0.1rem 0.4rem;
@@ -61,11 +47,26 @@ h2 {
   border-radius: 1rem;
   border: double 4px white;
 }
+#info-red {
+  color: red;
+  font-size: 1.5rem;
+  padding: 0.5rem;
+  text-shadow: 0 0 2px black;
+}
 span {
   color: red;
   font-size: 3rem;
   padding: 0.5rem;
   text-shadow: 0 0 2px white;
+}
+
+/* Game Section */
+.game {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 60%;
 }
 #game-base {
   width: 640px;
@@ -81,6 +82,7 @@ span {
   position: relative;
   border: 4px solid #2767bb;
   border-radius: 10px;
+  cursor: pointer;
 }
 
 .disc {
@@ -100,4 +102,29 @@ span {
 
 .disc.yellow {
   background: gold;
+}
+
+@media screen and (max-width: 754px) {
+  .wrapper {
+    height: fit-content;
+    flex-direction: column;
+  }
+  .info {
+    width: 100%;
+    padding: 2rem;
+  }
+  .game {
+    width: 100%;
+    height: 100vh;
+  }
+  #game-base {
+    width: 100%;
+    padding-top: 70px;
+  }
+  #game-table {
+    width: 100%;
+    border: 3px solid #2767bb;
+    border-radius: 2px;
+    cursor: pointer;
+  }
 }
